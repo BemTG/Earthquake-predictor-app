@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<!-- Sidebar -->
+<div class="w3-sidebar w3-bar-block w3-animate-left" style="display:none;z-index:5" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
+  <a href="#" class="w3-bar-item w3-button"><!--Link 1--></a>
+  <a href="#" class="w3-bar-item w3-button"><!--Link 1--></a>
+  <a href="#" class="w3-bar-item w3-button"><!--Link 1--></a>
+</div>
+
+<img src="https://static01.nyt.com/images/2018/10/28/business/28Earthquakes-illo/28Earthquakes-illo-articleLarge-v2.gif?quality=90&auto=webp" style="margin-left:auto;margin-right:auto ;position: absolute; left: 76%; height: 197.1px; width: 246.3px; top:67px">
+
+<!-- Page Content -->
+<div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+
+<div>
+  <button class="w3-button w3-white w3-xxlarge" onclick="w3_open()">&#9776;</button>
+  <div class="w3-container">
+  </div>
+</div>
+     
+<script>
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<head>
+<div class="w3-container w3-center w3-teal"></div>
+
+<header class="w3-container w3-teal" >
+
+   <strong><i class="material-icons w3-spin w3-jumbo">bam</i></strong>
+</div>
+<h1 style="color: white"><b>Applied Machine Learning</b> </h1>
+  <h1 style="color:lavenderblush ">Earthquake Forecasting System</h1>
+</header></div>
+
+
+     <div class="w3-panel w3-white w3-round-xxlarge">
+  <h3></h3>
+  <p style="color: white"><b><br>This</b></p></div>
+
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF=8">
+    <title>Predicting Earthquakes</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqfyY7nSpl4e1nXGOEF8W-FZsVv-KWdHQ&libraries=visualization&callback=initMap">
+    </script>
+
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height:50%;
+        width: 80%;
+        margin-left:auto;margin-right:auto
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+      #floating-panel {
+        background-color: #fff;
+        border: 1px solid #999;
+        left: 25%;
+        padding: 5px;
+        position: absolute;
+        top: 10px;
+        z-index: 5;
+      }
+    </style>
+  </head>
+
+  <body style="background-color:white;">
+        <table border=0 cellpadding="1" style="width: 80%; background-color:teal;margin-left:auto;margin-right:auto">
+            <tr>
+              <td><h3><p style="text-align:center"><font color="white">Drag Slider to see forecasts</font></p></h3></td>
+            </tr>
+        </table>
+
+
+    <div id="map"></div>
+    <script> 
+
+      var map, heatmap;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 1.8,
+          center: {lat: 0, lng: 0},
+          mapTypeId: 'roadmap'
+        });
+
+        heatmap = new google.maps.visualization.HeatmapLayer({
+          data: getPoints(),
+          map: map
+        });
+      }
+
+      function toggleHeatmap() {
+        heatmap.setMap(heatmap.getMap() ? null : map);
+      }
+
+      function changeGradient() {
+        var gradient = [
+          'rgba(0, 255, 255, 0)',
+          'rgba(0, 255, 255, 1)',
+          'rgba(0, 191, 255, 1)',
+          'rgba(0, 127, 255, 1)',
+          'rgba(0, 63, 255, 1)',
+          'rgba(0, 0, 255, 1)',
+          'rgba(0, 0, 223, 1)',
+          'rgba(0, 0, 191, 1)',
+          'rgba(0, 0, 159, 1)',
+          'rgba(0, 0, 127, 1)',
+          'rgba(63, 0, 91, 1)',
+          'rgba(127, 0, 63, 1)',
+          'rgba(191, 0, 31, 1)',
+          'rgba(255, 0, 0, 1)'
+        ]
+        heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+      }
+
+      // Heatmap data
+      function getPoints() {
+        //place where we paste in our longititude latitude from our flask app
+        return [{{earthquake_horizon}}] 
+      }
+    </script>
+
+        <table border=1 cellpadding="1" style="width: 80%; background-color:teal;margin-left:auto;margin-right:auto">
+            <tr>
+                <td><p style="text-align:center">
+                  <form id='submit_params' method="POST" action="{{ url_for('build_page') }}">
+                    <div class="slidecontainer" style='width: 100%;'>
+                    <label><font color="white">Select future date: <span id="label_slider_value">{{date_horizon}}</span></font></label><BR>
+                    <input type="range" min="0" max="{{days_out_to_predict}}" value="{{current_value}}" name="slider_date_horizon" 
+                      id="slider_date_horizon" step="1" style='width: 100%;'>
+                  </div>
+                </form>
+             </td>
+          </tr>
+      </table>
+
+
+     <script>
+        // Slider logic
+        var slider1 = document.getElementById("slider_date_horizon");
+        var output1 = document.getElementById("label_slider_value");
+
+          slider1.onmouseup = function () {
+            document.getElementById("submit_params").submit();
+          }
+
+        slider1.oninput = function() {
+            var horizon_date = new Date();
+            horizon_date.setDate(horizon_date.getDate() + Math.trunc(parseInt(this.value)));
+            output1.innerHTML = (horizon_date.getMonth()+1) + "/" + horizon_date.getDate() + "/" + horizon_date.getFullYear(); //this.value;
+
+        }
+
+     </script>
+
+
+
+
+
+
+
+
+<p style="color: white"> y</p>
+
+<!--button-->
+  <p style="top:50%; text-align: center; position: absolute margin-left:auto;margin-right:auto;"><i class="fa fa-spinner w3-spin" style="font-size:64px" ></i></p>
+
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+  height: 100%; /* Should be removed. Only for demonstration */
+}
+
+.left, .right {
+  width: 10%;
+}
+
+.middle {
+  width: 80%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+</head>
+<body>
+
+
+<div class="row">
+  <div class="column left" style="background-color:white;">
+    <h2></h2>
+    <p></p>
+  </div>
+  <div class="column middle" style="background-color:white;">
+
+
+    
+
+    <h2>How earthquakes are tracked and forecasted?</h2>
+    <p style="color: darkslategray; font-size: 16px">
+
+Earthquakes are very hard to predict by nature. Some scientists believe that the quakes that are deeper and more powerful behave more cyclically. Most of our reliable tools today come from long term histrocal forecasting and now with the help of AI we can make better predictions than before. When highly active areas are overdue for a big earthquake the AI will spot these patterns and give allerts. This method is good at identifying the most risky areas in relation to other active areas especially. There are other methods of predicting earthquakes as well, one of which is using seismometers to track and map tiny shifts that happen in the earths crust.<br><br></p>
+
+<h2>How does this webapp work?</h2>
+<p style="color: darkslategray; font-size: 16px">
+
+This web application aims to forecast earthquakes that may occur around the world in the foreseeable future using live earthquake data.<br><br>
+
+This predictive model is done using Xgboost which is a machine learning algorithm. The algorithm is trained using the latest monthly earthquake data pulled in from <a href="https://www.usgs.gov/natural-hazards/earthquake-hazards/earthquakes">United States Geological Survey (USGC)</a> which is updated every minute. This model predicts the locations where earthquake may occur around the globe in the next 5 days.<br><br></p>
+
+
+
+
+<h2>Improvements  </h2>
+<p style="color: darkslategray; font-size: 16px">
+It is important to note that this natural phenomena is still being studied and we still haven't found a method to predict earthquakes with full certainty and complete accuracy hence they cause a lot of damage and kill tens of thousands of people every year. 
+
+<br><br>The code for this project is open sourced and you can find it on <a href="https://github.com/BemTG/Quantlog/blob/master/Predicting%20quakes%20(gamma).ipynb">github</a> . Feel free to play around!<br><br></p>
+
+
+  </div>
+  
+  <div class="column right" style="background-color:white;">
+    <h2 ></h2>
+    <p></p>
+  </div>
+</div>
+
+
+
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: teal;
+   color: white;
+   text-align: center;
+}
+</style>
+</head>
+<body>
+
+
+
+<div class="footer">
+  <p>© 2019-2020 Quantlog-technologies.com - Premium quantitative strategies, forecasting & tracking  services.
+</p>
+</div>
+
+
+
+
+
+
+
+
+
+    </body>
+</html>
